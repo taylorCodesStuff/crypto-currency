@@ -20,3 +20,9 @@ export default function() {
         </AppContext.Consumer>  
     );
 } 
+
+// {({coinNames}) => (
+//     <CoinGridStyled>
+//         {Object.keys(coinNames).map((coinKey, index) => 
+//             <div key={index}> {coinKey} </div>     
+//         )}
