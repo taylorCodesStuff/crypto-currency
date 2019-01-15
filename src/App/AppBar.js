@@ -34,7 +34,8 @@ function ControlButton({name, active}){
 }
 
 export default function() {
-    return ( <Bar>
+    return ( 
+    <Bar>
        <Logo> CryptoMarket </Logo>
        <div></div>
        <ControlButton active name="Dashboard" />
