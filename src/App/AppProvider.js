@@ -29,13 +29,13 @@ export class AppProvider extends React.Component {
 
     fetchCoins = async () => {
         let coinList = (await cc.coinList()).Data;
-        console.log(coinList);
         this.setState({coinList});
     }
 
     fetchPrices = async () => {
         if(this.state.firstVisit) return;
         let prices = await this.prices();
+        console.log(prices);
         this.setState({prices});
     }
 
