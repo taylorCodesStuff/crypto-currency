@@ -1,9 +1,10 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
 import {SelectableTile} from '../Shared/Tile';
-import { fontSize3, fontSizeBig } from '../Shared/Styles';
+import { fontSize3, fontSizeBig, greenBoxShadow } from '../Shared/Styles';
 import {CoinHeaderGridStyled} from "../Settings/CoinHeaderGrid";
-import { green, red } from 'ansi-colors';
+import {AppContext} from '../App/AppProvider';
+
 
 
 const numberFormat = number => {
@@ -36,6 +37,11 @@ const PriceTileStyled = styled(SelectableTile)`
         grid-template-columns: repeat(3, 1fr);
         justify-items: right;
     `}
+
+    ${props => props.favorite && css`
+        ${greenBoxShadow}
+        pointer-events: none;
+    `}
 `;
 
 function ChangePercent({data}){
@@ -48,9 +54,11 @@ function ChangePercent({data}){
     );
 }
 
-function PriceTile({sym, data}){
+function PriceTile({sym, data, favorite, setFavorite}){
     return (
-        <PriceTileStyled>
+        <PriceTileStyled 
+            onClick={setFavorite}
+            favorite={favorite}>
             <CoinHeaderGridStyled>
                 <div> {sym} </div>
                 <ChangePercent data={data} />
@@ -62,9 +70,13 @@ function PriceTile({sym, data}){
     );
 }
 
-function PriceTileCompact({sym, data}){
+function PriceTileCompact({sym, data, favorite, setFavorite}){
     return (
-        <PriceTileStyled compact>
+        <PriceTileStyled 
+            onClick={setFavorite}
+            compact 
+            favorite={favorite}
+            >
             <JustifyLeft>
                 {sym}
             </JustifyLeft>
@@ -81,6 +93,17 @@ export default function({price, index}) {
     let data = price[Object.keys(price)[0]]['USD'];
     let TileClass = index < 5 ? PriceTile : PriceTileCompact;
     return (
-        <TileClass sym={symbol} data={data} key={index} />
+        <AppContext.Consumer>
+            {({currentFavorite, setCurrentFavorite}) => (
+                <TileClass 
+                    sym={symbol} 
+                    data={data} 
+                    favorite={currentFavorite === symbol} 
+                    setFavorite={() => setCurrentFavorite(symbol)}
+                    key={index} 
+                >
+                </TileClass>
+            )}
+        </AppContext.Consumer>
     );
 }
