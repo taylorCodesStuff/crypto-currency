@@ -33,7 +33,7 @@ export default function({coinKey, topSection}) {
                     name={coin.CoinName} 
                     symbol={coin.Symbol} 
                 />
-                <CoinImage coin={coin} />
+                <CoinImage coin={coin}/>
             </TileClass>
         }}
     </AppContext.Consumer>
