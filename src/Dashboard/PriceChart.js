@@ -4,7 +4,6 @@ import {Tile} from '../Shared/Tile';
 import {AppContext} from '../App/AppProvider';
 import ReactHighcharts from 'react-highcharts';
 import HighchartsTheme from './HighchartsTheme';
-import Content from '../Shared/Content';
 
 ReactHighcharts.Highcharts.setOptions(HighchartsTheme);
 
