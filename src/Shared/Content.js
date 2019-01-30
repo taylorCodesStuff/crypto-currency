@@ -10,6 +10,7 @@ export default function(props) {
             if(!firstVisit && !prices) {
                 return <div> Loading Prices </div>
             }
+            
             return <div> {props.children} </div>
         }}
     </AppContext.Consumer>
